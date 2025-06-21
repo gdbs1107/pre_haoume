@@ -12,15 +12,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # 전체 히스토리를 받아야 커밋 로그를 확인 가능
+          fetch-depth: 0
 
-      - name: Get commit log
+      - name: Get recent commit messages
         id: getlog
         run: |
-          COMMITS=$(git log --pretty=format:'- %h %s' ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }})
-          echo "COMMITS<<EOF" >> $GITHUB_OUTPUT
-          echo "$COMMITS" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          echo "commits=$(git log -n 10 --pretty=format:'- %h %s')" >> $GITHUB_OUTPUT
 
       - name: Comment on PR
         uses: peter-evans/create-or-update-comment@v4
@@ -29,5 +26,5 @@ jobs:
           body: |
             ✅ PR이 병합되었습니다.
 
-            ### 포함된 커밋 목록:
-            ${{ steps.getlog.outputs.COMMITS }}
+            ### 최근 커밋 목록 (참고용):
+            ${{ steps.getlog.outputs.commits }}
