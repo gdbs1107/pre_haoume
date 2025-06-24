@@ -2,7 +2,9 @@ package or.umc.prehaoume;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
+@EnableFeignClients
 @SpringBootApplication
 public class PrehaoumeApplication {
 
@@ -11,9 +13,3 @@ public class PrehaoumeApplication {
     }
 
 }
-
-/**
- * 1
- * 2
- * 3
- * */

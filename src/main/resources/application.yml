@@ -1,0 +1,8 @@
+openai:
+  api-key: ${OPEN_AI_KEY}
+
+logging:
+  level:
+    or.umc.prehaoume.ai: DEBUG
+    root: INFO
+
