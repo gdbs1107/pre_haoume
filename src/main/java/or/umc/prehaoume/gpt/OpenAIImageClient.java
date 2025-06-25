@@ -1,5 +1,5 @@
 
-package or.umc.prehaoume.ai;
+package or.umc.prehaoume.gpt;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -42,6 +42,8 @@ dependencies {
 
     // Swagger
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
+
+    implementation 'com.google.genai:google-genai:1.5.0'
 }
 
 tasks.named('test') {

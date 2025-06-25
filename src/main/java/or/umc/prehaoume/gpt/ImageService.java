@@ -1,4 +1,4 @@
-package or.umc.prehaoume.ai;
+package or.umc.prehaoume.gpt;
 
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +18,7 @@ import java.util.UUID;
 public class ImageService {
 
     private final OpenAIImageClient openAIImageClient;
+
     @Value("${openai.api-key}")
     private String apiKey;
 
@@ -27,6 +28,12 @@ public class ImageService {
         request.setModel("gpt-image-1");
 
         try {
+
+            /**
+             * FeignClient를 통해 LLM 연동하고 데이터 받아옴
+             *
+             * 여러 장 받을 수 있지만, 요청을 한 장으로 했기 때문에 응답은 한 장으로 고정
+             * */
             ImageResponse response = openAIImageClient.generateImage("Bearer " + apiKey, request);
 
             if (response.getData() == null || response.getData().isEmpty()) {
@@ -34,6 +41,7 @@ public class ImageService {
                 return null;
             }
 
+            // 응답 타입인 base64로 인코딩된 string 을 이미지로 변환
             String b64 = response.getData().get(0).getB64_json();
             byte[] imageBytes = Base64.getDecoder().decode(b64);
 

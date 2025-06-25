@@ -1,4 +1,4 @@
-package or.umc.prehaoume.ai;
+package or.umc.prehaoume.gpt;
 
 import lombok.Data;
 
